@@ -1,0 +1,25 @@
+controllers:
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
+
+api_groups:
+  path: "/api/groups"
+  controller: 'App\Controller\GroupsController::getGroups'
+  methods: ["GET"]
+
+api_group_create:
+  path: "/api/groups"
+  controller: 'App\Controller\GroupsController::createGroup'
+  methods: ["POST"]
+
+api_group_update:
+  path: "/api/groups/{id}"
+  controller: 'App\Controller\GroupsController::updateGroup'
+  methods: ["PUT"]
+
+api_group_delete:
+  path: "/api/groups/{id}"
+  controller: 'App\Controller\GroupsController::deleteGroup'
+  methods: ["DELETE"]
