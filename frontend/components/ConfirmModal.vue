@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { Product } from "~/global";
+
 import {
   TransitionRoot,
   TransitionChild,
@@ -8,11 +10,9 @@ import {
   DialogTitle,
 } from "@headlessui/vue";
 
-const BACK_URL = useRuntimeConfig().public.BACKEND_URL;
-
 const props = defineProps({
   data: {
-    type: Array,
+    type: Array as PropType<Product[]>,
   },
   editing: {
     type: Boolean,
@@ -25,33 +25,23 @@ const newGroupName = ref("");
 
 const emit = defineEmits(["updateGroups"]);
 
-const createNewGroup = async () => {
-  const res = await $fetch(`${BACK_URL}/groups`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: newGroupName.value,
-      products: props.data,
-    }),
-  });
-
+const handleCreateNewGroup = async () => {
+  const res = await createNewGroup(newGroupName.value, props.data as Product[]);
   if (res) emit("updateGroups");
 };
 
-function acceptModal() {
-  createNewGroup();
+const acceptModal = () => {
+  handleCreateNewGroup();
   closeModal();
-}
+};
 
-function closeModal() {
+const closeModal = () => {
   isOpen.value = false;
-}
+};
 
-function openModal() {
+const openModal = () => {
   isOpen.value = true;
-}
+};
 </script>
 
 <template>

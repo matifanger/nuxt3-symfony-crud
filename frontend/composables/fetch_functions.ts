@@ -1,4 +1,4 @@
-import { Group, Product } from "~/global";
+import { Product } from "~/global";
 
 export const removeGroup = async (id: number) => {
   const BACK_URL = useRuntimeConfig().public.BACKEND_URL;
@@ -31,6 +31,21 @@ export const updateProductGroup = async (id: number, products: Product[]) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      products,
+    }),
+  });
+};
+
+export const createNewGroup = async (name: string, products: Product[]) => {
+  const BACK_URL = useRuntimeConfig().public.BACKEND_URL;
+
+  return await $fetch(`${BACK_URL}/groups`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
       products,
     }),
   });

@@ -22,6 +22,10 @@ const props = defineProps({
     type: Number,
     required: false,
   },
+  canRemove: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const styles = computed(() => {
@@ -55,7 +59,7 @@ const styles = computed(() => {
       </p>
     </div>
     <div
-      v-if="removable"
+      v-if="removable && canRemove"
       class="absolute -top-2.5 -right-2 transition cursor-pointer"
       @click="$emit('remove-product', { groupId: groupId, data: data })"
     >

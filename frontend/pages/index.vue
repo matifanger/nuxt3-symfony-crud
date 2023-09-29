@@ -2,6 +2,8 @@
 import { Group, Product } from "~/global";
 
 const BACK_URL = useRuntimeConfig().public.BACKEND_URL;
+const editingMode = ref(false);
+const selectedProducts = ref<Product[]>([]);
 
 const { data: groups, refresh: refreshGroups } = await useAsyncData<Group[]>(
   "index-groups",
@@ -73,9 +75,6 @@ const updateGroups = () => {
   selectedProducts.value = [];
 };
 
-const editingMode = ref(false);
-const selectedProducts = ref<Product[]>([]);
-
 const handleSelectedProduct = (key: number) => {
   const product = products[key];
   const index = selectedProducts.value.findIndex(
@@ -92,10 +91,12 @@ const handleSelectedProduct = (key: number) => {
 
 <template>
   <div class="bg-gray-50 min-h-screen font-Poppins">
-    <div class="container">
+    <main class="container">
       <h1 class="text-center py-5 text-4xl font-bold">Bienvenido</h1>
       <div class="grid grid-cols-12 gap-5 mb-10">
-        <div class="col-span-12 md:col-span-6 border border-gray-300 rounded">
+        <section
+          class="col-span-12 md:col-span-6 border border-gray-300 rounded"
+        >
           <h2 class="text-2xl border-b border-gray-300 p-3 font-semibold">
             Productos
           </h2>
@@ -114,8 +115,10 @@ const handleSelectedProduct = (key: number) => {
               </div>
             </li>
           </ul>
-        </div>
-        <div class="col-span-12 md:col-span-6 border border-gray-300 rounded">
+        </section>
+        <section
+          class="col-span-12 md:col-span-6 border border-gray-300 rounded"
+        >
           <h2 class="text-2xl border-b border-gray-300 p-3 font-semibold">
             Grupos
           </h2>
@@ -157,6 +160,7 @@ const handleSelectedProduct = (key: number) => {
                   :removable="true"
                   :groupId="group.id"
                   type="small"
+                  :canRemove="group.products.length > 1"
                   @remove-product="(e) => handleUpdateProductGroup(e)"
                 />
               </div>
@@ -171,14 +175,13 @@ const handleSelectedProduct = (key: number) => {
               producto de la lista.
             </p>
           </div>
-        </div>
+        </section>
       </div>
       <ConfirmModal
         v-if="selectedProducts.length"
         :data="selectedProducts"
         @updateGroups="updateGroups"
       />
-      <!-- <CreateGroupBtn v-if="selectedProducts.length" @click="createNewGroup" /> -->
-    </div>
+    </main>
   </div>
 </template>
