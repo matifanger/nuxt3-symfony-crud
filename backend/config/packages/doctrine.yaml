@@ -6,7 +6,7 @@ doctrine:
     default_table_options:
       charset: utf8mb4
       collate: utf8mb4_unicode_ci
-    url: "mysql://root:toor@127.0.0.1:3306/promochallenge"
+    url: "%env(resolve:DATABASE_URL)%"
     profiling_collect_backtrace: "%kernel.debug%"
   orm:
     default_entity_manager: default
