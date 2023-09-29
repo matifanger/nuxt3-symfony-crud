@@ -171,7 +171,7 @@ const handleSelectedProduct = (key: number) => {
             v-else
           >
             <p>
-              Aun no tienes ningun grupo, para crear uno selecciona algun
+              Aún no tienes ningún grupo. Para crear uno, selecciona algún
               producto de la lista.
             </p>
           </div>
