@@ -14,11 +14,15 @@ yarn install
 yarn dev
 ```
 
-## Backend
+### Backend
 ```
 composer install
-# Create new database and modify .env file to setup DATABASE_URL
-# Then:
+```
+
+#### Create new database and modify .env file to setup DATABASE_URL
+#### Then:
+
+```
 php bin/console make:migration
 symfony server:start
 ```
