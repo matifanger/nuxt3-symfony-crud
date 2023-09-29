@@ -19,8 +19,8 @@ yarn dev
 composer install
 ```
 
-#### Create new database and modify .env file to setup DATABASE_URL
-#### Then:
+#### Create a new database and modify the .env file to setup DATABASE_URL
+#### Then continue with:
 
 ```
 php bin/console doctrine:schema:update --force
